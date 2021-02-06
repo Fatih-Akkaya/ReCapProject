@@ -16,6 +16,10 @@ namespace Business.Concrete
         }
         public void Add(Car car)
         {
+            if (car.Description.Length < 2 && car.DailyPrice>0)
+            {
+                throw new NotImplementedException("Ürün ismi kurallara uygun değil.");
+            }
             _carDAL.Add(car);
         }
 
@@ -29,19 +33,19 @@ namespace Business.Concrete
             return _carDAL.GetAll();
         }
 
-        public List<Car> GetAllByBrand(int brandId)
-        {
-            return _carDAL.GetAllByBrand(brandId);
-        }
-
-        public List<Brand> GetAllBrands()
-        {
-            return _carDAL.GetAllBrands();
-        }
-
         public void Update(Car car)
         {
             _carDAL.Update(car);
+        }
+
+        public List<Car> GetCarsByBrandId(int id)
+        {
+            return _carDAL.GetAll(p => p.BrandId == id);
+        }
+
+        public List<Car> GetCarsByColorId(int id)
+        {
+            return _carDAL.GetAll(p => p.ColorId == id);
         }
     }
 }

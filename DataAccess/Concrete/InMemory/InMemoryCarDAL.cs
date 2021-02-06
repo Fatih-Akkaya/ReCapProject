@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete.InMemory
@@ -15,15 +16,15 @@ namespace DataAccess.Concrete.InMemory
 
         public InMemoryCarDAL()
         {
-            _colors = new List<Color> { new Color { ColorId = 1, ColorName = "Black" },
-            new Color { ColorId = 2, ColorName = "Silver" },
-            new Color { ColorId = 3, ColorName = "Red" },
-            new Color { ColorId = 4, ColorName = "Blue" },
-            new Color { ColorId = 5, ColorName = "White" }};
-            _brands = new List<Brand> { new Brand { BrandId=1, BrandName="Lamborghini"},
-            new Brand { BrandId=2, BrandName="Maserati"},
-            new Brand { BrandId=3, BrandName="Bentley"},
-            new Brand { BrandId=4, BrandName="Aston Martin"}};
+            _colors = new List<Color> { new Color { Id = 1, Name = "Black" },
+            new Color { Id = 2, Name = "Silver" },
+            new Color { Id = 3, Name = "Red" },
+            new Color { Id = 4, Name = "Blue" },
+            new Color { Id = 5, Name = "White" }};
+            _brands = new List<Brand> { new Brand { Id=1, Name="Lamborghini"},
+            new Brand { Id=2, Name="Maserati"},
+            new Brand { Id=3, Name="Bentley"},
+            new Brand { Id=4, Name="Aston Martin"}};
             _cars = new List<Car> { new Car { Id=1, BrandId=1, ColorId=1, ModelYear=2019, DailyPrice=125000, Description="One door" },
             new Car { Id=2, BrandId=1, ColorId=2, ModelYear=2021, DailyPrice=135000, Description="Four door" },
             new Car { Id=3, BrandId=2, ColorId=3, ModelYear=2018, DailyPrice=120000, Description="Four door" },
@@ -42,9 +43,19 @@ namespace DataAccess.Concrete.InMemory
             _cars.Remove(_cars.SingleOrDefault(c => c.Id == car.Id));
         }
 
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Car> GetAll()
         {
             return _cars;
+        }
+
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Brand> GetAllBrands()
