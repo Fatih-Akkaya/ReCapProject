@@ -18,7 +18,7 @@ namespace Business.Concrete
         {
             if (car.Description.Length < 2 && car.DailyPrice>0)
             {
-                throw new NotImplementedException("Ürün ismi kurallara uygun değil.");
+                throw new NotImplementedException("Araç açıklaması kurallara uygun değil.");
             }
             _carDAL.Add(car);
         }
