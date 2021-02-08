@@ -14,11 +14,12 @@ namespace ReCapConsoleUI
         static void Main(string[] args)
         {
             CarManager carManager = new CarManager(new EFCarDAL());
-
-            foreach (var car in carManager.GetAll())
+            /*int brandId = new EFBrandDAL().GetByName("Renault").Id;
+            int colorId = new EFColorDAL().GetByName("Black").Id;
+            carManager.Add(new Car { Name = "Megane", BrandId=brandId, ColorId=colorId, ModelYear=2018, DailyPrice=450 });*/
+            foreach (var car in carManager.GetCarDetails())
             {
-                string brand = new EFBrandDAL().Get(b => b.Id == car.BrandId).Name;
-                Console.WriteLine("Brand : " + brand + " Model : " + car.ModelYear + " Price : " + car.DailyPrice);
+                Console.WriteLine(car.CarName + " / " + car.BrandName + " / " + car.ColorName + " / " + car.DailyPrice);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,13 +26,13 @@ namespace DataAccess.Concrete.InMemory
             new Brand { Id=2, Name="Maserati"},
             new Brand { Id=3, Name="Bentley"},
             new Brand { Id=4, Name="Aston Martin"}};
-            _cars = new List<Car> { new Car { Id=1, BrandId=1, ColorId=1, ModelYear=2019, DailyPrice=125000, Description="One door" },
-            new Car { Id=2, BrandId=1, ColorId=2, ModelYear=2021, DailyPrice=135000, Description="Four door" },
-            new Car { Id=3, BrandId=2, ColorId=3, ModelYear=2018, DailyPrice=120000, Description="Four door" },
-            new Car { Id=4, BrandId=3, ColorId=1, ModelYear=2019, DailyPrice=130000, Description="One door" },
-            new Car { Id=5, BrandId=3, ColorId=2, ModelYear=2021, DailyPrice=155000, Description="Four door" },
-            new Car { Id=6, BrandId=4, ColorId=3, ModelYear=2017, DailyPrice=140000, Description="One door" },
-            new Car { Id=7, BrandId=4, ColorId=4, ModelYear=2021, DailyPrice=160000, Description="One door" }};
+            _cars = new List<Car> { new Car { Id=1, BrandId=1, ColorId=1, ModelYear=2019, DailyPrice=125000, Name="One door" },
+            new Car { Id=2, BrandId=1, ColorId=2, ModelYear=2021, DailyPrice=135000, Name="Four door" },
+            new Car { Id=3, BrandId=2, ColorId=3, ModelYear=2018, DailyPrice=120000, Name="Four door" },
+            new Car { Id=4, BrandId=3, ColorId=1, ModelYear=2019, DailyPrice=130000, Name="One door" },
+            new Car { Id=5, BrandId=3, ColorId=2, ModelYear=2021, DailyPrice=155000, Name="Four door" },
+            new Car { Id=6, BrandId=4, ColorId=3, ModelYear=2017, DailyPrice=140000, Name="One door" },
+            new Car { Id=7, BrandId=4, ColorId=4, ModelYear=2021, DailyPrice=160000, Name="One door" }};
         }
         public void Add(Car car)
         {
@@ -68,6 +69,16 @@ namespace DataAccess.Concrete.InMemory
             return _cars.Where(c => c.BrandId == brandId).ToList();
         }
 
+        public Car GetById(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDTO> GetCarDetails()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Car car)
         {
             Car carToUpdate = _cars.SingleOrDefault(c => c.Id == car.Id);
@@ -75,7 +86,7 @@ namespace DataAccess.Concrete.InMemory
             carToUpdate.ColorId = car.ColorId;
             carToUpdate.ModelYear = car.ModelYear;
             carToUpdate.DailyPrice = car.DailyPrice;
-            carToUpdate.Description = car.Description;
+            carToUpdate.Name = car.Name;
         }
     }
 }
