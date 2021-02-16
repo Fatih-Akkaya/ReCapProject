@@ -17,10 +17,32 @@ namespace ReCapConsoleUI
             /*int brandId = new EFBrandDAL().GetByName("Renault").Id;
             int colorId = new EFColorDAL().GetByName("Black").Id;
             carManager.Add(new Car { Name = "Megane", BrandId=brandId, ColorId=colorId, ModelYear=2018, DailyPrice=450 });*/
-            foreach (var car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+            if (result.Success)
             {
-                Console.WriteLine(car.CarName + " / " + car.BrandName + " / " + car.ColorName + " / " + car.DailyPrice);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName + " / " + car.BrandName + " / " + car.ColorName + " / " + car.DailyPrice);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+            RentalManager rentalManager = new RentalManager(new EFRentalDAL());
+            var rental = rentalManager.GetById(4);
+            if (rental.Success)
+            {
+                rental.Data.ReturnDate = DateTime.Today;
+            }
+            
+            var rentalResult = /*rentalManager.Update(rental.Data);
+            Console.WriteLine(rentalResult.Message);*/
+            rentalManager.Add(new Rental { CarId = 5, CustomerId = 4, RentDate = DateTime.Today });
+
+            Console.WriteLine(rentalResult.Message);
+            
+            
         }
     }
 }
