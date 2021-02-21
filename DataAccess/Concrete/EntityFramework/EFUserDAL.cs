@@ -14,7 +14,12 @@ namespace DataAccess.Concrete.EntityFramework
         {
                 using (ReCapContext context = new ReCapContext())
                 {
-                    return context.Users.SingleOrDefault(b => b.EMail.Equals(email));
+                var result = from u in context.Users
+                             where u.EMail == email
+                             select u;
+                             
+                return result.SingleOrDefault();
+                
                 }
         }
     }
