@@ -30,6 +30,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EFRentalDAL>().As<IRentalDAL>().SingleInstance();
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<EFUserDAL>().As<IUserDAL>().SingleInstance();
+            builder.RegisterType<CarImageManager>().As<ICarImageService>().SingleInstance();
+            builder.RegisterType<EFCarImageDAL>().As<ICarImageDAL>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
