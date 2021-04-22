@@ -5,9 +5,15 @@ using System.Text;
 
 namespace Entities.DTOs
 {
-    public class CarDetailDTO:IDTO
+    public class RentalDetailDTO:IDTO
     {
-        //CarName, BrandName, ColorName, DailyPrice
+        public int RentalId { get; set; }
+        public int CustomerId { get; set; }
+        public string CompanyName { get; set; }
+        public int UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string EMail { get; set; }
         public int CarId { get; set; }
         public string CarName { get; set; }
         public int BrandId { get; set; }
@@ -16,5 +22,7 @@ namespace Entities.DTOs
         public string ColorName { get; set; }
         public int ModelYear { get; set; }
         public decimal DailyPrice { get; set; }
+        public DateTime? RentDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
     }
 }

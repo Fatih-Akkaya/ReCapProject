@@ -12,6 +12,7 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -59,15 +60,15 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        public IDataResult<List<Car>> GetCarsByBrandId(int id)
+        public IDataResult<List<CarDetailDTO>> GetCarsByBrandId(int id)
         {
-            return new SuccessDataResult<List<Car>>(_carDAL.GetAll(c => c.BrandId == id), Messages.CarsListed); 
+            return new SuccessDataResult<List<CarDetailDTO>>(_carDAL.GetCarDetails(c => c.BrandId == id), Messages.CarsListed); 
         }
 
         [CacheAspect]
-        public IDataResult<List<Car>> GetCarsByColorId(int id)
+        public IDataResult<List<CarDetailDTO>> GetCarsByColorId(int id)
         {
-            return new SuccessDataResult<List<Car>>(_carDAL.GetAll(c => c.ColorId == id), Messages.CarsListed);
+            return new SuccessDataResult<List<CarDetailDTO>>(_carDAL.GetCarDetails(c => c.ColorId == id), Messages.CarsListed);
         }
 
         [CacheAspect]
@@ -76,9 +77,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDTO>>(_carDAL.GetCarDetails());
         }
         [CacheAspect]
-        public IDataResult<Car> GetById(int id)
+        public IDataResult<CarDetailDTO> GetById(int id)
         {
-            return new SuccessDataResult<Car>(_carDAL.Get(c => c.Id == id));
+            return new SuccessDataResult<CarDetailDTO>(_carDAL.GetCarDetails(c => c.CarId == id).SingleOrDefault());
         }
 
         [TransactionScopeAspect]

@@ -75,6 +75,10 @@ namespace WebAPI
                 env.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
             }
 
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
+
+            app.UseStaticFiles();
+
             app.UseRouting();
             
             app.UseAuthentication();

@@ -4,6 +4,7 @@ using Core.Aspects.Autofac.Caching;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -42,6 +43,12 @@ namespace Business.Concrete
         public IDataResult<Customer> GetByUserId(int id)
         {
             return new SuccessDataResult<Customer>(_customerDAL.GetByUserId(id));
+        }
+
+        [CacheAspect]
+        public IDataResult<List<CustomerDetailDTO>> GetCustomerDetails()
+        {
+            return new SuccessDataResult<List<CustomerDetailDTO>>(_customerDAL.GetCustomerDetails(), Messages.CustomersListed);
         }
 
         [CacheRemoveAspect("ICustomerService.Get")]

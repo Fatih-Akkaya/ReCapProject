@@ -7,6 +7,7 @@ using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,6 +72,12 @@ namespace Business.Concrete
         {
             _rentalDAL.Update(rental);
             return new SuccessResult(Messages.RentalUpdated);
+        }
+
+        [CacheAspect]
+        public IDataResult<List<RentalDetailDTO>> GetRentalDetails()
+        {
+            return new SuccessDataResult<List<RentalDetailDTO>>(_rentalDAL.GetRentalDetails(), Messages.RentalsListed);
         }
     }
 }
